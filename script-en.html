@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Assisted Speedrun Helper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="script.css">
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Tool Assisted Speedrun Helper</h1>
+            <p style="font-size: 0.85em; color: #a0aec0; font-style: italic; margin: 5px 0 0; text-align: left; letter-spacing: 0.5px;">By Echecetdame</p>
+        </div>
+        <nav>
+            <a href="main-en.html">Home</a>
+            <a href="script-en.html">Scripts</a>
+            <a href="converter-en.html">Converter - TAS Editor</a>
+            <a href="#">Input Recorder (Beta)</a>
+            <a href="script-fr.html">
+                <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French Flag" class="flag-image">
+            </a>
+        </nav>
+    </header>
+    <main>
+        <div class="button-group">
+            <button class="button" onclick="loadFiles('Shrine')">Shrines</button>
+            <button class="button" onclick="loadFiles('Dungeons')">Dungeons</button>
+            <button class="button" onclick="loadFiles('Other CE')">Other CE</button>
+            <button class="button" onclick="loadFiles('Other')">Others</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Segment</th>
+                        <th>Time</th>
+                        <th>Username</th>
+                        <th>Important Information</th>
+                        <th>Size</th>
+                        <th>Download</th>
+                    </tr>
+                </thead>
+                <tbody id="fileTableBody">
+                    <!-- Rows will be dynamically added -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script>
+        const repositories = {
+            'Shrine': 'https://api.github.com/repos/EchecetdameSR/TAS-Helper/contents/script/Shrine',
+            'Dungeons': 'https://api.github.com/repos/EchecetdameSR/TAS-Helper/contents/script/Dungeons',
+            'Other CE': 'https://api.github.com/repos/EchecetdameSR/TAS-Helper/contents/script/Other%20CE',
+            'Other': 'https://api.github.com/repos/EchecetdameSR/TAS-Helper/contents/script/Other'
+        };
+
+        async function loadFiles(category) {
+            const url = repositories[category];
+            const tableBody = document.getElementById('fileTableBody');
+            tableBody.innerHTML = '';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch files');
+                const files = await response.json();
+                files.filter(file => file.name.endsWith('.txt')).forEach(file => {
+                    const { name, size, download_url } = file;
+                    const [username, segment, time, ...info] = name.replace('.txt', '').split('-');
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${segment || 'N/A'}</td>
+                        <td>${time || 'N/A'}</td>
+                        <td>${username || 'N/A'}</td>
+                        <td>${info.join(' ') || 'N/A'}</td>
+                        <td>${(size / 1024).toFixed(2)} KB</td>
+                        <td><a href="${download_url}" class="download-link" target="_blank">Download</a></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error loading files:', error);
+                tableBody.innerHTML = '<tr><td colspan="6">Error loading files</td></tr>';
+            }
+        }
+    </script>
+</body>
+</html>

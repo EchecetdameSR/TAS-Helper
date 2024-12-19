@@ -1,0 +1,149 @@
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+    color: #f9fafb;
+    text-align: center;
+}
+
+header {
+    background-color: #272b30;
+    color: #ffffff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #4a5568;
+}
+
+.flag-image {
+    width: 40px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+main {
+    padding: 40px 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+main p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #e2e8f0;
+}
+
+.button-group {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.button {
+    background-color: #4a5568;
+    color: #f9fafb;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background-color: #2d3748;
+    transform: scale(1.05);
+}
+
+.button:active {
+    background-color: #1e293b;
+}
+
+.table-container {
+    margin: 40px auto;
+    max-width: 90%;
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #272b30;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: left;
+    color: #f9fafb;
+}
+
+thead {
+    background-color: #2d3748;
+}
+
+thead th {
+    padding: 15px;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #a0aec0;
+}
+
+tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #1e293b;
+}
+
+tbody tr:hover {
+    background-color: #4a5568;
+}
+
+tbody td {
+    padding: 12px 15px;
+    font-size: 0.95em;
+}
+
+.download-link {
+    color: #63b3ed;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.download-link:hover {
+    text-decoration: underline;
+}
